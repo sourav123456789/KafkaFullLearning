@@ -1,0 +1,19 @@
+Kafka connect ->
+
+If your producer source code is not in your control -> you can use kafka connect to connect to kafka
+broker.Capable to take the data from a source system and send the data to the kafka broker.
+
+again from broker it can pass it to the destination.
+
+Left hand side is called source Connector , right side is sink connector.
+
+Kafka connect itself is a cluster , each system in the 
+kafka connect is called as a kafka connect worker.
+
+----------------------------------------------------------
+
+Topics -> partitions and offsets
+
+
+
+

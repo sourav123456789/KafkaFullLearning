@@ -14,6 +14,112 @@ kafka connect is called as a kafka connect worker.
 
 Topics -> partitions and offsets
 
+1-Topic is a perticular Stream of data. Its similar to Table in DB(Without all constrains).
+2-Can have as many topics as you want.
+3-Topics are identified with the name.
+4-Topics are splitted to partitions.
+5-Each message with in the partition will get an Incremental id called offset.
+6- offsets are infinite.
+7-For offset order is guaranted with in partition.
+8-Data is kept for a limited period of time (1 week).
+But it doesnot mean that offset count will decrease.
+9-Once data is written to partition you cannot change it. Immutable.
+10-Data will go randomly to the partitions unless you specify the key of the partition.
+
+RelationShip Between Topics and Brokers:->
+
+1-Kafka cluster consists of multiple broker.(Server)
+2-Each broker is identified with its ID.
+3-Each broker can hold certain topic partitions.
+4- once you are connected to Any broker called bootstrap broker , you are connected to the entire
+Server.
+
+Topic Replication Factor:->
+1-Replication Factor is for  topic, not for Partition.
+2- At any time , there will be a single leader for a given partition and multiple isr(in-sync replicas)
+3- Leader is responsible for accepting and serviing data for a spacific partition.
+
+Producers :->
+
+1- Producers automatically get to know to which topic and partition they need to write to.
+2- In case of failure , they recovered automatically.
+3- Producer write data to topic.
+4- There are 3 acknowledgement mode for producer can follow:->
+      1-acks = 0 -> producer will send data and wont wait for acknowledgement (High chance of data loss)
+      2- acks = 1 -> Producer will wait for the leader to Acknowledge(Low chance of data loss)
+      3- acks = all -> leader and all replicas should acknowledge(No data loss)
+
+5- Producer will send message key for each message . If key is null , then message will go to the partition round robin.
+Kafka guarantees that for the same key message will go to the same partition always.(As long as no of partition remains constant)
+6- key can be anything . Number , String Anything
+
+
+Consumer :->
+
+1- Consumer Read data from the topic.
+2- Consumer automatically knows from which broker they have to read data.
+3- Failure they can recover automatically.
+4- Within a partition consumer reads data sequentially.
+
+
+Consumer Group:->
+
+1- Each consumer in the consumer Group Read Data from an exclusive partition.
+2- If more consumer are there than partition , then few consumers have to wait.
+
+Start Zookepper->
+zookeeper-server-start.bat config\zookeeper.properties
+
+start kafka :->
+kafka-serve-start.bat config\server.properties
+
+TOPICS :->
+Create a Topic without partition and offset and replication factor:->
+
+kafka-topics --bootstrap-server localhost:9092 --topic first_topic --create
+
+Description of the created topic:->
+
+kafka-topics --bootstrap-server localhost:9092 --topic first_topic --describe
+
+Create a topic with partition , offset and replication factor :->
+
+kafka-topics --bootstrap-server localhost:9092 --topic first_topic --create --partitions 3 --replication-factor 1
+
+List all the topics we have :->
+
+kafka-topics --bootstrap-server localhost:9092 --list
+
+
+KAFKA-CONSOLE-PRODUCER :->
+
+produce to a topic --->
+
+kafka-console-producer --bootstrap-server localhost:9092 --topic first_topic
+
+KAFKA-CONSOLE-CONSUMER :->
+
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic [ --group my-first-application] 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -7,7 +7,7 @@ again from broker it can pass it to the destination.
 
 Left hand side is called source Connector , right side is sink connector.
 
-Kafka connect itself is a cluster , each system in the 
+Kafka connect itself is a cluster , each system in the
 kafka connect is called as a kafka connect worker.
 
 ----------------------------------------------------------
@@ -99,7 +99,7 @@ kafka-console-producer --bootstrap-server localhost:9092 --topic first_topic
 
 KAFKA-CONSOLE-CONSUMER :->
 
-kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic [ --group my-first-application] 
+kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic [ --group my-first-application]
 
 
 KAFKA-CONSUMER-GROUPS :->
@@ -107,24 +107,22 @@ KAFKA-CONSUMER-GROUPS :->
 kafka-consumer-groups --bootstrap-server localhost:9092 --group my-first-application
 --reset-offset --to-earliest --execute --topic first_topic
 
+Difference in kafka implementation with normal core java and spring boot kafka.
+-----------------------------------------------------------------------------------
+Prodcuer part:->
+core java :->
+1- create properties object and set properties
+2- Create the kafka producer and pass the config.
+3- send method will take the producer record .
+So create the producer record and give it to the send method.
+4- producer record is an overloaded construcor having message , key
+topic value and partition values.
 
+Spring boot :->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+1- create a kafkaProcuerFactory and give all the configs to it.
+2- create the kafkaTemplate and give the producer factory to kafkaTemplate
+as an argument.
+3- kafka template is having various methods handly with it to send the
+message.-
+----------------------------------------------------------------------------

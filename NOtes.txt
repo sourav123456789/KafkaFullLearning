@@ -102,6 +102,11 @@ KAFKA-CONSOLE-CONSUMER :->
 kafka-console-consumer --bootstrap-server localhost:9092 --topic first_topic [ --group my-first-application] 
 
 
+KAFKA-CONSUMER-GROUPS :->
+
+kafka-consumer-groups --bootstrap-server localhost:9092 --group my-first-application
+--reset-offset --to-earliest --execute --topic first_topic
+
 
 
 
